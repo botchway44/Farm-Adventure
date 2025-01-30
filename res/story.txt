@@ -1,0 +1,8 @@
+walk | ACTION | cabbage, Strawberry, Onion, Blueberry, Carrot, Cauliflower, Tomato, Pineapple | You have walked to {object}, what do you want to do. | You cannot walk to {object}
+move | ACTION | cabbage, Strawberry, Onion, Blueberry, Carrot, Cauliflower, Tomato, Pineapple | You have moved to {object}, what do you want to do. | You cannot move to {object}
+go | ACTION | cabbage, Strawberry, Onion, Blueberry, Carrot, Cauliflower, Tomato, Pineapple | You are at {object} location, what do you want to do. | You cannot go to {object}
+take | INVENTORY | cabbage, Strawberry, Onion, Blueberry, Carrot, Cauliflower, Tomato, Pineapple, fruit, axe, Shovel, Pickaxe, key | You have taken the {object},  | You cannot take {object}
+pick | INVENTORY | cabbage, Strawberry, Onion, Blueberry, Carrot, Cauliflower, Tomato, Pineapple, fruit, axe, Shovel, Pickaxe, key  | You have picked up {object},  | You cannot water {object}
+water | INVENTORY | cabbage, Strawberry, Onion, Blueberry, Carrot, Cauliflower, Tomato, Pineapple | {object} watered.  | I cannot pick {object}
+open | INTERACT | chest | You have opened {object},  | I cannot open {object}
+unlock | INTERACT | chest | you have unlocked {object},  | I cannot open {object}

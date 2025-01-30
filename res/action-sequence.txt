@@ -1,0 +1,4 @@
+take |  key, fruit
+throw | key
+shoot | bird,
+plough | grass

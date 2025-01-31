@@ -1,54 +1,50 @@
 package utils;
 
 import java.io.File;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Scanner;
 
 public class Loader {
 
-    public static  HashMap<String, UserCommand> loadCommands(){
-        Scanner input = null;
+    public static HashMap<String, UserCommand> loadCommands() {
 
-        HashMap<String, UserCommand> commands = new HashMap<String, UserCommand>();
+        HashMap<String, UserCommand> commands = new HashMap<>();
         try {
-            input = new Scanner(new File("res/story.txt"));
+            Scanner input = new Scanner(new File("res/story.txt"));
 
-            while(input.hasNextLine()){
+            while (input.hasNextLine()) {
                 String line = input.nextLine();
                 System.out.println(line);
 
-                if(line.isEmpty()){
+                if (line.isEmpty()) {
 
                     System.out.println("Continuing");
                     continue;
                 }
 
 
-                //Split the file and check if it has 3 parts else throw an error
+                //Split the file and check if it has 5 parts else throw an error
                 String[] parts = line.split("\\|");
 
-                if(parts.length != 5){
-                    throw new Exception("Story File Format Wrong");
-                }
+                if (parts.length != 5) throw new Exception("Story File Format Wrong");
 
-                String[] commandObjects =  parts[2].toLowerCase().trim().strip().split(",");
+
+                String[] commandObjects = parts[2].toLowerCase().trim().strip().split(",");
                 HashSet<String> objectSet = new HashSet<>();
-                for (String object : commandObjects){
+                for (String object : commandObjects) {
                     objectSet.add(object.trim().strip());
                 }
 
                 CommandType commandType = CommandType.ACTION;
-                System.out.println("COMMAND TYPE :: "+parts[1]);
-                System.out.println("COMMAND TYPE :: "+parts[1].toString().strip().trim().equalsIgnoreCase("INVENTORY"));
-                if(parts[1].toString().strip().trim().equals("INVENTORY")){
+
+                if (parts[1].strip().trim().equals("INVENTORY")) {
                     commandType = CommandType.INVENTORY;
-                }else if(parts[1].toString().strip().trim().equals("ACTION")){
-                    commandType = CommandType.ACTION;
-                }else if(parts[1].toString().strip().trim().equals("INTERACT")){
+                } else if (parts[1].strip().trim().equals("INTERACT")) {
                     commandType = CommandType.INTERACT;
                 }
 
                 UserCommand command = new UserCommand(parts[0].trim().strip().toLowerCase(), objectSet, parts[3], commandType);
-                System.out.println(command.toString());
 
                 commands.put(parts[0].trim().strip(), command);
             }
@@ -61,30 +57,31 @@ public class Loader {
     }
 
     public static HashMap<String, HashSet<String>> loadInteractiveSequence(String path) {
-        Scanner input = null;
 
-        HashMap<String, HashSet<String>> actionSequence = new HashMap<String, HashSet<String>>();
+        HashMap<String, HashSet<String>> actionSequence = new HashMap<>();
         try {
-            input = new Scanner(new File(path));
+            Scanner input = new Scanner(new File(path));
 
-            while(input.hasNextLine()){
+            while (input.hasNextLine()) {
                 String line = input.nextLine();
                 System.out.println(line);
 
-                if(line.isEmpty()){continue; }
+                if (line.isEmpty()) {
+                    continue;
+                }
 
 
                 //Split the file and check if it has 3 parts else throw an error
                 String[] parts = line.split("\\|");
 
 
-                if(parts.length != 2){
+                if (parts.length != 2) {
                     throw new Exception("Format Wrong");
                 }
 
-                String[] commandObjects =  parts[1].toLowerCase().trim().strip().split(",");
+                String[] commandObjects = parts[1].toLowerCase().trim().strip().split(",");
                 HashSet<String> objectSet = new HashSet<>();
-                for (String object : commandObjects){
+                for (String object : commandObjects) {
                     objectSet.add(object.trim().strip());
                 }
 

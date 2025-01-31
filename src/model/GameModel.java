@@ -14,13 +14,11 @@ public class GameModel {
     private Stack<CommandState> commandsHistory;
     private CommandState currentStateAction = null;
 
-    private final HashMap<String, HashSet<String>> actionSequence;
     private final   HashMap<String, HashSet<String>> objectSequence;
 
-    public GameModel(HashMap<String, UserCommand> commands, HashMap<String, HashSet<String>> actionSequence, HashMap<String, HashSet<String>> objectSequence){
+    public GameModel(HashMap<String, UserCommand> commands, HashMap<String, HashSet<String>> objectSequence){
         commandsHistory = new Stack<>();
         this.commands = commands;
-        this.actionSequence = actionSequence;
         this.objectSequence = objectSequence;
     }
 
@@ -58,13 +56,20 @@ public class GameModel {
 
     public boolean stateHasActivatedObject(String object){
         CommandState currentStateAction = this.getCurrentStateAction();
-        System.out.println("Current State :::" +currentStateAction.toString());
-        if(currentStateAction != null && currentStateAction.getObject().equals(object)){
-                return true;
-        }
 
-        return false;
+        return currentStateAction != null && currentStateAction.getObject().equals(object);
+    }
+
+    public Stack<CommandState> getCommandsHistory() {
+        return commandsHistory;
+    }
+
+    public void addCommandToHistory(CommandState command) {
+        this.commandsHistory.add(command);
     }
 
 
+    public HashMap<String, UserCommand> getCommands() {
+        return commands;
+    }
 }

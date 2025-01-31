@@ -11,10 +11,9 @@ public class Main {
 
 
         HashMap<String, HashSet<String>> objectSequence =   Loader.loadInteractiveSequence("res/object-sequence.txt");
-        HashMap<String, HashSet<String>> actionSequence =   Loader.loadInteractiveSequence("res/action-sequence.txt");
         HashMap<String, UserCommand> commands =  Loader.loadCommands();
 
-        GameController gameController = new GameController(commands, actionSequence, objectSequence );
+        GameController gameController = new GameController(commands, objectSequence );
         gameController.startGame();
     }
 }

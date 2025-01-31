@@ -1,6 +1,5 @@
 package utils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class UserCommand {
@@ -10,9 +9,8 @@ public class UserCommand {
     private String description;
     private CommandType type;
 
-    public UserCommand(String action, HashSet<String> objects, String description, CommandType type){
+    public UserCommand(String action, HashSet<String> objects, String description, CommandType type) {
         this.action = action.strip().toLowerCase();
-        System.out.println("START"+this.action+"END");
         this.objects = objects;
         this.description = description;
         this.type = type;
@@ -35,7 +33,7 @@ public class UserCommand {
         return type;
     }
 
-    public String toString(){
-        return action+" " + type+" "+objects.toString() + " " + description;
+    public String toString() {
+        return action + " " + type + " " + objects.toString() + " " + description;
     }
 }

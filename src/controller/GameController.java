@@ -147,11 +147,37 @@ public class GameController {
         }
         //if it is INTERACT,  set it as the current state and execute
         else if (userCommand.getType() == CommandType.INTERACT) {
-            //check the current Action is not null
-            if (this.gameModel.hasCurrentState()) {
-                //check if the user has an object in the input that exist as
+
+            //check if the user has an object in the input that exist as
+            if (this.gameModel.stateHasActivatedObject(object)) {
+                //check if the object exist in the object sequence
+                //check if an item in the inventory can unlock the object in the object sequence
+                //if(this.inventoryManager)
+
+                // object -> object sequence
+                if (this.gameModel.canObjectsInteract(object)) {
+                    // pull the interactable objects and check if any of them exist in the inventory
+
+
+                    HashSet<String> items = this.gameModel.getInteractableObjects(object);
+                    for (String item : items) {
+                        if (this.inventoryManager.hasItem(item)) {
+                            this.gameView.displayOutput("Using " + item + " to " + command + " with " + object);
+                            // reduce the item in the inventory
+                            this.inventoryManager.reduceItem(item);
+                            String newMessage = userCommand.getDescription().replace("{object}", object);
+                            this.gameView.displayOutput(newMessage);
+                            return;
+                        }
+                    }
+
+                    this.gameView.displayOutput("Cannot " + command + " " + object + ", You need any of these objects : " + items.toString());
+
+                } else {
+                    this.gameView.displayOutput("You cannot " + userCommand.getAction() + " " + object);
+                }
             } else {
-                this.gameView.displayOutput("");
+                this.gameView.displayOutput("You cannot interact with " + object + ", you have to be at the " + object + "'s location");
             }
         }
 
@@ -162,7 +188,6 @@ public class GameController {
     }
 
     public void historyManager() {
-        StringBuilder newMessage = new StringBuilder();
         for (CommandState command : this.gameModel.getCommandsHistory()) {
             this.gameView.displayOutput("- " + command.toString());
         }

@@ -15,14 +15,11 @@ public class Loader {
 
             while (input.hasNextLine()) {
                 String line = input.nextLine();
-                System.out.println(line);
+                //System.out.println(line);
 
                 if (line.isEmpty()) {
-
-                    System.out.println("Continuing");
                     continue;
                 }
-
 
                 //Split the file and check if it has 5 parts else throw an error
                 String[] parts = line.split("\\|");
@@ -44,7 +41,7 @@ public class Loader {
                     commandType = CommandType.INTERACT;
                 }
 
-                UserCommand command = new UserCommand(parts[0].trim().strip().toLowerCase(), objectSet, parts[3], commandType);
+                UserCommand command = new UserCommand(parts[0].trim().strip().toLowerCase(), objectSet, parts[3].trim().strip(), commandType);
 
                 commands.put(parts[0].trim().strip(), command);
             }
@@ -64,7 +61,7 @@ public class Loader {
 
             while (input.hasNextLine()) {
                 String line = input.nextLine();
-                System.out.println(line);
+                //System.out.println(line);
 
                 if (line.isEmpty()) {
                     continue;
@@ -84,7 +81,7 @@ public class Loader {
                 for (String object : commandObjects) {
                     objectSet.add(object.trim().strip());
                 }
-
+                
                 actionSequence.put(parts[0].trim().strip(), objectSet);
             }
         } catch (Exception e) {

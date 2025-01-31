@@ -52,4 +52,5 @@ Example Commands :
 - Create a Sequence for Rooms and allow Player to move to different Rooms
 - Improve Parser to pick multiple objects and execute actions on them
 - When a user enters an object, it should be able to prompt the user with the commands available for the object
+- RESTRUCTURE initial part of the story to store different actions that can act on different objects.
 - 

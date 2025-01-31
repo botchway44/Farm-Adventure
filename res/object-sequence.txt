@@ -1,1 +1,2 @@
-key | door, chest
+door | key,  🔑,🗝️
+chest | key, 🔑,🗝️

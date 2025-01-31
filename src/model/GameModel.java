@@ -1,47 +1,46 @@
 package model;
 
-import utils.CommandType;
 import utils.UserCommand;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Stack;
 
 public class GameModel {
 
-    private HashMap<String, UserCommand> commands;
-    private Stack<CommandState> commandsHistory;
+    private final HashMap<String, UserCommand> commands;
+    private final Stack<CommandState> commandsHistory;
     private CommandState currentStateAction = null;
 
-    private final   HashMap<String, HashSet<String>> objectSequence;
+    private final HashMap<String, HashSet<String>> objectSequence;
 
-    public GameModel(HashMap<String, UserCommand> commands, HashMap<String, HashSet<String>> objectSequence){
+    public GameModel(HashMap<String, UserCommand> commands, HashMap<String, HashSet<String>> objectSequence) {
         commandsHistory = new Stack<>();
         this.commands = commands;
         this.objectSequence = objectSequence;
     }
 
-    public boolean hasCommandObject(String action, String object){
-        if(this.commands.containsKey(action)){
+    public boolean hasCommandObject(String action, String object) {
+        if (this.commands.containsKey(action)) {
             return this.commands.get(action).getObjects().contains(object);
         }
 
         return false;
     }
 
-    public boolean hasCurrentState(){
+    public boolean hasCurrentState() {
 
-        if(currentStateAction != null){
+        if (currentStateAction != null) {
             return true;
         }
-        return  false;
+        return false;
     }
 
-    public boolean hasCommand(String action){
-      return  this.commands.containsKey(action);
+    public boolean hasCommand(String action) {
+        return this.commands.containsKey(action);
     }
-    public UserCommand getCommand(String action){
+
+    public UserCommand getCommand(String action) {
         return this.commands.get(action);
     }
 
@@ -54,7 +53,7 @@ public class GameModel {
     }
 
 
-    public boolean stateHasActivatedObject(String object){
+    public boolean stateHasActivatedObject(String object) {
         CommandState currentStateAction = this.getCurrentStateAction();
 
         return currentStateAction != null && currentStateAction.getObject().equals(object);
@@ -68,6 +67,14 @@ public class GameModel {
         this.commandsHistory.add(command);
     }
 
+    public boolean canObjectsInteract(String object) {
+        return this.objectSequence.containsKey(object);
+    }
+
+
+    public HashSet<String> getInteractableObjects(String object) {
+        return this.objectSequence.get(object);
+    }
 
     public HashMap<String, UserCommand> getCommands() {
         return commands;

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/eclipse-workspace/JackTheExplorer/JackTheExplorer.iml" filepath="$USER_HOME$/eclipse-workspace/JackTheExplorer/JackTheExplorer.iml" />
       <module fileurl="file://$PROJECT_DIR$/Text Adventure Game Graphics.iml" filepath="$PROJECT_DIR$/Text Adventure Game Graphics.iml" />
     </modules>
   </component>
